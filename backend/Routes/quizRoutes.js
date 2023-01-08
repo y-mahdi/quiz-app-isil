@@ -1,13 +1,15 @@
 const express=require('express');
-const {allQuizes,quizesByUserId,modifyQuiz,deleteQuiz} =require('../Controllers/quizController');
+const {allQuizes,addQuiz,quizesByUserId,modifyQuiz,deleteQuiz} =require('../Controllers/quizController');
 const router=express.Router();
 
-router.get('/'); //all quizes
+router.get('/',allQuizes); //all quizes
 
-router.get('/quiz/:user') // quiz invited to or created by a user
+router.get('/quiz/:user',quizesByUserId) // quiz invited to or created by a user
 
-router.post('/quiz');  //post a quiz
+router.post('/quiz',addQuiz);  //post a quiz
 
-router.put('/quiz/:id');  //Modify a quiz   
+router.put('/quiz/:id',modifyQuiz);  //Modify a quiz   
 
-router.delete('/quiz/:id');  //delete a quiz   
+router.delete('/quiz/:id',deleteQuiz);  //delete a quiz   
+
+module.exports=router;

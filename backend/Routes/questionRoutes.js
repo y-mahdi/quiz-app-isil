@@ -9,3 +9,5 @@ router.post('/question',postQuestion); //add a question
 router.put('/question/:id',modifyQuestion); //modify a question
 
 router.delete('/question/:id',deleteQuestion); //delete a question
+
+module.exports=router;

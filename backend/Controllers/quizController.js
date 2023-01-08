@@ -5,7 +5,7 @@ module.exports.allQuizes=(req,res,next)=>{
         res.send(data);
     });
     next();
-}´
+}
 module.exports.addQuiz=(req,res,next)=>{
     quizModel.create(req.body).then((data)=>{
         res.send(data);

@@ -26,22 +26,35 @@ module.exports.addUser=(req,res,next)=>{
     }
     next();
 }
-module.exports.modfiyUser=(req,res,next)=>{
+module.exports.modifyUser=(req,res,next)=>{
+    let object={}
     if(req.body.type=='professor'){
-        ProfessorModel.findByIdAndUpdate({_id:req.params.id},{
-            email:req.body.email,
-            password:req.body.password
-        }).then((data)=>{
+        if(req.body.nom){
+            object.nom=req.body.nom;
+        }
+        else if(req.body.email){
+            object.email=req.body.email;
+        }
+        else if(req.body.password){
+            object.password=req.body.password;
+        }
+        ProfessorModel.findByIdAndUpdate({_id:req.params.id},object).then((data)=>{
             res.send(data);
         }).catch(e=>{
             console.log(e);
         })
     }
     else if(req.body.type=='etudiant'){
-        EtudiantModel.findByIdAndUpdate({_id:req.params.id},{
-            email:req.body.email,
-            password:req.body.password
-        }).then((data)=>{
+        if(req.body.nom){
+            object.nom=req.body.nom;
+        }
+        else if(req.body.email){
+            object.email=req.body.email;
+        }
+        else if(req.body.password){
+            object.password=req.body.password;
+        }
+        EtudiantModel.findByIdAndUpdate({_id:req.params.id},object).then((data)=>{
             res.send(data);
         }).catch(e=>{
             console.log(e);

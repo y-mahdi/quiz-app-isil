@@ -22,6 +22,10 @@ const quiz=new mongoose.Schema({
     },
     lalistesdestentative:{
         type:Array
+    },
+    auteur:{
+        type:String,
+        required:true
     }
 })
 

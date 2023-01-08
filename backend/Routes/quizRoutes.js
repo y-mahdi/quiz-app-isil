@@ -1,5 +1,5 @@
 const express=require('express');
-
+const {allQuizes,quizesByUserId,modifyQuiz,deleteQuiz} =require('../Controllers/quizController');
 const router=express.Router();
 
 router.get('/'); //all quizes

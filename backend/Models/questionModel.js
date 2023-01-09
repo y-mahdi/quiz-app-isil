@@ -1,6 +1,10 @@
 const mongoose=require('mongoose');
 
 const question=mongoose.Schema({
+    question:{
+        type:String,
+        required:true
+    },
     type:{
         type:String,
         required:true

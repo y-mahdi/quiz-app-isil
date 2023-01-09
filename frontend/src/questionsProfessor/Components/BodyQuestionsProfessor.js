@@ -3,7 +3,7 @@ import AddQuestionPopup from "./addQuestionPopup";
 import { useState } from "react";
 
 export default function BodyQuestionsProfessor() {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
     function closeAdd(){
         setOpen(false)
     }

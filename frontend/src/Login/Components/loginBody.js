@@ -8,8 +8,8 @@ export default function LoginBody() {
                 <input type='text' placeholder="Email" /><br/>
                 <input type='password' placeholder="*******" /><br/>
                 <select>
-                    <option>Professeur</option>
-                    <option>Etudiant</option>
+                    <option  value={'professeur'}>Professeur</option>
+                    <option value={'etudiant'}>Etudiant</option>
                 </select><br/>
                 <button>Log in</button>
                 <div className="signup-message-panel">

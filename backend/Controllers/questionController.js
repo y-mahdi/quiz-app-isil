@@ -1,7 +1,7 @@
 const questionModel=require('../Models/questionModel');
 
 module.exports.allQuestions=async(req,res,next)=>{
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000'")
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader("Access-Control-Max-Age", "1800");
     res.setHeader("Access-Control-Allow-Headers", "content-type");
@@ -36,6 +36,11 @@ module.exports.postQuestion=async(req,res,next)=>{
 }
 
 module.exports.modifyQuestion=(req,res,next)=>{
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
     questionModel.findByIdAndUpdate({_id:req.params.id},req.body).then((data)=>{
         res.send(data);
     }).catch((e)=>{
@@ -45,6 +50,11 @@ module.exports.modifyQuestion=(req,res,next)=>{
 }
 
 module.exports.deleteQuestion=(req,res,next)=>{
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
     questionModel.findByIdAndDelete(req.params.id).then(()=>{
         console.log(req.params.id+" is deleted succesfully");
     }).catch((e)=>{

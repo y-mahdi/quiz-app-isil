@@ -239,3 +239,74 @@ div{
     padding: 5px;
     border-radius: 5px;
 }
+.list-questions-scroll{
+    height: 550px;
+    overflow: scroll;
+    width: 98%;
+    margin-left: 1%;
+}
+.questions-control-panel-cc{
+    display: flex;
+    background-color:var(--color-bg-light);
+    /* width: 100%; */
+    width: 98%;
+    margin-left: 1%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 5px;
+    font-family: Didact;
+    color: var(--color-gray);
+}
+.questions-control-panel-cc button{
+    border-radius: 10px;
+    border: none;
+    background-color:var(--color-gray);
+    width: 50px;
+    padding: 5px;
+    font-family: Didact;
+    color: var(--color-bg-dark);
+}
+.questions-control-panel-cc button:active{
+    width: 51px;
+}
+.detail-popup-container{
+    position: absolute;
+    top: 20%;
+    right:10%;
+    width: 500px;
+    height: 500px;
+    background-color:var(--color-gray);
+    border-radius: 10px;
+}
+.detail-popup-text{
+    text-align: center;
+    font-family: Didact;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+.detail-info-text label{
+    font-weight: bold;
+    font-size: 0.9rem;
+    font-family: Didact;
+    margin-left: 40px;
+    color: var(--color-bg-dark);
+}
+.detail-info-text{
+    font-size: 0.9rem;
+    font-family: Didact;
+    color: var(--color-bg-dark);
+}
+.button-close-popup{
+    position: absolute;
+    top: 10px;
+    right:10px;
+    background: none;
+    border: none;
+    font-family: Didact;
+    font-size: 1rem;
+    border-radius: 10px;
+    
+}
+.button-close-popup:active{
+    font-size: 1.09rem;
+}

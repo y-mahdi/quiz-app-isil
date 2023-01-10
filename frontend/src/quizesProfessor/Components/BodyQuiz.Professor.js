@@ -16,6 +16,7 @@ export default function BodyQuizProfessor() {
                     <button onClick={()=>{setOpenAddQuizPopup(true)}}>Ajoute</button>
                 </div>
             </div>
+            
         </div>
         {AddQuizPopup(OpenAddQuizPopup,CloseAddQuizPopUp)}
         </>

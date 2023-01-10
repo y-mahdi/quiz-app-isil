@@ -56,3 +56,7 @@ html {
 .button-navigation-container:active{
     width: 102px;
 }
+.container-quiz-professor{
+    background-color: var(--color-bg-dark);
+    width: 100%;
+}

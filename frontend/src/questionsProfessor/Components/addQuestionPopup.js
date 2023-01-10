@@ -1,10 +1,31 @@
 import closeIcon from '../../Icons/close.svg';
-import { useState} from 'react';
-
+import { useEffect, useState} from 'react';
+import AddQuestion from '../Api/AddQuestion';
 export default function AddQuestionPopup(Open,closefunct) {
-   
+    
+    const SuccesMessage=(variable)=>{
+        if (variable) {
+            return(
+                <div className='added-message-text-buttom-center'>Added succesfully</div>
+            )
+        } else {
+            return(
+                <></>
+            )
+        }
 
-
+    }
+    const ResetVariables=()=>{
+        setAddedToDB(false)
+        setBonneReponse([])
+        setReponseErronnees([])
+        setReponseErronneeExact("")
+        setBonneReponseExact("")
+        setDiffculte("")
+        setQuestion("")
+        setTypequestion("")
+    }
+    const [AddedToDB, setAddedToDB] = useState(false)
     const [Question, setQuestion] = useState("");
     const [typequestion, setTypequestion] = useState("");
     const [diffculte, setDiffculte] = useState("");
@@ -12,19 +33,44 @@ export default function AddQuestionPopup(Open,closefunct) {
     const [ReponseErronnees, setReponseErronnees] = useState([])
     const [bonneReponseExact, setBonneReponseExact] = useState("");
     const [ReponseErronneeExact, setReponseErronneeExact] = useState("")
+   
     const addToBonneReponse=()=>{
         setBonneReponse(bonneReponse=>[...bonneReponse,bonneReponseExact]);
+        
     }
     const addToReponseErronnee=()=>{
         
         setReponseErronnees(ReponseErronnees=>[...ReponseErronnees,ReponseErronneeExact]);
     }
+    const SendQuestion=async()=>{
+        if(ReponseErronnees.length==0 || bonneReponse.length==0 || Question=='' || typequestion=='' || diffculte==''){
+            alert('incomplete data')
+        }
+        else{
+            try {
+                await AddQuestion(Question,typequestion,diffculte,bonneReponse,ReponseErronnees);
+                await setAddedToDB(true);
+                ResetVariables()
+            } catch (error) {
+                setAddedToDB(false)
+        }   
+        
+            
+        }
+        
+    }
+    useEffect(()=>{
+
+    },[AddedToDB])
     if(Open){
         return(
             <div className="add-questions-popup-container">
                 <div className='title-question-panel'>
                     <div className='add-question-title-text'>Ajoute une Question</div>
-                    <button onClick={closefunct}><img src={closeIcon} width="40px" alt='close icon '/></button>
+                    <button onClick={()=>{
+                        closefunct();
+                        ResetVariables();
+                    }}><img src={closeIcon} width="40px" alt='close icon '/></button>
 
                 </div>
                 <div className='form-question-container'>
@@ -66,9 +112,10 @@ export default function AddQuestionPopup(Open,closefunct) {
                                 })
                             }
                         </div>
-                        <button>Enregistrer</button>
+                        <button onClick={()=>SendQuestion()}>Enregistrer</button>
                     </div>
                 </div>
+                {SuccesMessage(AddedToDB)}
             </div>
         )
     }

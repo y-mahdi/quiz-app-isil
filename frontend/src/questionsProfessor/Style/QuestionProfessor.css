@@ -93,6 +93,8 @@ div{
     height: 500px;
     background-color: var(--color-gray);
     border-radius: 10px;
+    text-align: center;
+    justify-content: center;
 }
 .title-question-panel{
     display: flex;
@@ -224,4 +226,16 @@ div{
 }
 .form-question-container-part2 button:active{
     font-size: 1.1rem;
+}
+.added-message-text-buttom-center{
+    font-size:1rem;
+    text-align: center;
+    color: var(--color-gray);
+    font-family: Didact;
+    background-color: var(--color-bg-light);
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 5px;
 }

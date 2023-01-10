@@ -7,7 +7,8 @@ require('dotenv').config();
 mongoose.connect(process.env.DBKEY,()=>{
     console.log("connected")
 })
-
+mongoose.Promise=global.Promise;
+// mongoose.set('strictQuery', false)
 app.listen(process.env.PORT,()=>{
     console.log(`Server is Listening on ${process.env.PORT}`);
 })

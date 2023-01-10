@@ -60,3 +60,102 @@ html {
     background-color: var(--color-bg-dark);
     width: 100%;
 }
+.addQuiz-popup-container{
+    position: absolute;
+    top: 5%;
+    right: 10%;
+    width: 80%;
+    height: 90%;
+    background-color: var(--color-gray);
+    border-radius: 10px;
+    text-align: center;
+}
+.quiz-popup-title{
+    text-align: center;
+    font-family: Didact;
+    color: var(--color-bg-dark);
+    margin-top: 10px;
+    font-family: 1.5rem;
+    
+}
+.df-form-addquiz{
+    display: flex;
+    width: 100%;
+}
+.df-form-addquiz-part1{
+    width: 50%;
+    text-align: center;
+
+}
+.df-form-addquiz-part2{
+    width: 50%;
+    text-align: center;
+    
+}
+.addQuiz-popup-container input{
+    border-radius: 5px;
+    border: 1px solid var(--color-bg-dark);
+    padding: 10px;
+    width: 300px;
+    text-align: center;
+    font-family: Didact;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+.addQuiz-popup-container input::placeholder{
+    color: var(--color-bg-dark);
+}
+.input-label{
+    font-family: Didact;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    /* width: 300px; */
+    font-weight: bold;
+}
+.df-form-addquiz button{
+    border-radius: 5px;
+    border: 1px solid var(--color-bg-dark);
+    padding: 10px;
+    width: 300px;
+    text-align: center;
+    font-family: Didact;
+    font-size: 1rem;
+    margin-top: 10px;
+    color: var(--color-gray);
+    background-color: var(--color-bg-dark);
+}.df-form-addquiz button:active{
+    width: 301px;
+}
+.scroll-bar-question-container{
+    height: 300px;
+    height: 200px;
+    overflow: scroll;
+}
+.scroll-bar-students-container{
+    height: 300px;
+    height: 200px;
+    overflow: scroll;
+}
+.valid-button-add-quiz-cn{
+    border-radius: 5px;
+    border: 1px solid var(--color-bg-dark);
+    padding: 10px;
+    width: 300px;
+    text-align: center;
+    font-family: Didact;
+    font-size: 1rem;
+    margin-top: 40px;
+    color: var(--color-gray);
+    background-color: var(--color-bg-dark);
+    
+}
+.valid-button-add-quiz-cn:active{
+    width: 301px;
+}
+.close-button-top-right{
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    border: none;
+    background: none;
+}

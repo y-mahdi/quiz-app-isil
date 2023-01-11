@@ -72,14 +72,21 @@ module.exports.deleteQuiz=async(req,res,next)=>{
     })
     next();
 }
-module.exports.addTentatives=async()=>{
+module.exports.addTentatives=async(req,res,next)=>{
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
+    // let array=[]
     quizModel.findById(req.params.id).then(async(data)=>{
+        // array=data.lalistesdestentative;
         data.lalistesdestentative.push({
-            etudiant:req.body.student,
+            etudiant:req.body.etudiant,
             tentatives:req.body.tentatives
         });
         await quizModel.findByIdAndUpdate({_id:req.params.id},data).then(()=>{
             console.log(req.params.id+" is updated")
         })
-    })
+    })  
 }

@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import PostTentativeStudent from "../api/postTentativesStudents";
 
 
 export default function BodyQuizStudent(quiz) {
+    let Navigate=useNavigate();
     // const [QuizExact, setQuizExact] = useState()
     const [Counter, setCounter] = useState(0);
     const [Listesdestentaives, setListesdestentaives] = useState([]);
     const [ExactQuestions, setExactQuestions] = useState();
-    const [Answers, setAnswers] = useState(quiz.quetions[0].bonnereponse+quiz.quetions[0].reponseerronne)
+    // const [Answers, setAnswers] = useState(quiz.quetions[0].bonnereponse+quiz.quetions[0].reponseerronne)
     const [TotalNotes, setTotalNotes] = useState(0)
     const [SelectedAnswersExactQuestion, setSelectedAnswersExactQuestion] = useState([])
-    const [AfficheNote, setAfficheNote] = useState(false)
+    
     useEffect(()=>{
         
-            setAnswers(quiz.quetions[Counter].bonnereponse+quiz.quetions[Counter].reponseerronne)
+            // setAnswers(quiz.quetions[Counter].bonnereponse+quiz.quetions[Counter].reponseerronne)
         
         
     },[Counter])
@@ -49,12 +50,18 @@ export default function BodyQuizStudent(quiz) {
             note=0;
             setListesdestentaives(Listesdestentaives=>[Listesdestentaives,{
             questionid:quiz.quetions[0]._id,
-                note:note
+                note:note,
+                selected:SelectedAnswersExactQuestion
             }])
         }
         else if(bonnes>0){
             note=bonnes/(quiz.quetions[Counter].bonnereponse.length)
             setTotalNotes(TotalNotes+note)
+            setListesdestentaives(Listesdestentaives=>[Listesdestentaives,{
+                questionid:quiz.quetions[0]._id,
+                    note:note,
+                    selected:SelectedAnswersExactQuestion
+                }])
         }
         if(quiz.quetions.length>(Counter)){
             setCounter(Counter+1);
@@ -63,7 +70,13 @@ export default function BodyQuizStudent(quiz) {
         
         
     }
-
+    const postTentatives=async()=>{
+        try {
+            await PostTentativeStudent(quiz._id,"ahmed@uni.edu",Listesdestentaives);
+        } catch (error) {
+            console.log(error)
+        }
+    }
     const ButtonNextPanel=()=>{
         if(quiz.quetions.length>(Counter+1)){
             return(<div className="questions-control-panel-cc">
@@ -72,6 +85,7 @@ export default function BodyQuizStudent(quiz) {
             </div>)
         }
         else{
+            postTentatives()
             return(
             <div className="questions-control-panel-cc">
                         <div>Votre Note Final est : {TotalNotes}</div>

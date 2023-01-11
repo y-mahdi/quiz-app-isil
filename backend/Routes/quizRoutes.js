@@ -12,6 +12,6 @@ router.put('/quiz/:id',modifyQuiz);  //Modify a quiz
 
 router.delete('/quiz/:id',deleteQuiz);  //delete a quiz  
 
-router.post('/tentatives/:id',addTentatives);
+router.put('/tentatives/:id',addTentatives);
 
 module.exports=router;

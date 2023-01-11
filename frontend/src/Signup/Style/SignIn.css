@@ -52,6 +52,7 @@ html {
     position: absolute;
     top: 70px;
     right: 20px;
+    left: 100px;
     font-size: 1rem;
     font-family: Didact;
     color: var(--color-gray);
@@ -114,5 +115,12 @@ html {
     padding: 20px;
     background-color: var(--color-bg-light);
     font-family: Didact;
+    color: var(--color-gray);
+}
+.message-add-function{
+    text-align: center;
+    font-family: Didact;
+    font-size: 1rem;
+    padding: 10px;
     color: var(--color-gray);
 }

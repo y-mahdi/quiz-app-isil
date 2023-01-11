@@ -1,32 +1,48 @@
 const EtudiantModel=require('../Models/EtudiantModel');
 const ProfessorModel=require('../Models/professorModel');
 
-module.exports.addUser=(req,res,next)=>{
+module.exports.addUser=async(req,res,next)=>{
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
     if(req.body.type=='professor'){
-        ProfessorModel.create({
-            nom:req.body.nom,
-            email:req.body.email,
-            password:req.body.password
-        }).then((data)=>{
-            res.send(data)
-        }).catch((e)=>{
-            console.log(e);
-        })
+            
+            await ProfessorModel.create({
+                nom:req.body.nom,
+                email:req.body.email,
+                password:req.body.password
+            }).then((data)=>{
+                res.send(data)
+            }).catch((e)=>{
+                console.log(e);
+            })
+        
+        
     }
     else if(req.body.type=='etudiant'){
-        EtudiantModel.create({
-            nom:req.body.nom,
-            email:req.body.email,
-            password:req.body.password
-        }).then((data)=>{
-            res.send(data)
-        }).catch((e)=>{
-            console.log(e);
-        })
+            console.log(req.body)
+            await EtudiantModel.create({
+                nom:req.body.nom,
+                email:req.body.email,
+                password:req.body.password
+            }).then((data)=>{
+                res.send(data)
+            }).catch((e)=>{     
+                console.log(e);
+            })
+        
+        
     }
     next();
 }
 module.exports.modifyUser=(req,res,next)=>{
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
     let object={}
     if(req.body.type=='professor'){
         if(req.body.nom){
@@ -62,7 +78,12 @@ module.exports.modifyUser=(req,res,next)=>{
     }
     next();
 }
-module.exports.deleteUser=(req,res,next)=>{
+module.exports.deleteUser=async(req,res,next)=>{
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
     if(req.body.type=='professor'){
         ProfessorModel.findByIdAndDelete(req.params.id).then(()=>{
             console.log(req.params.id+" deleted")
@@ -70,4 +91,58 @@ module.exports.deleteUser=(req,res,next)=>{
             console.log(e);
         })
     }
+    else if(req.body.type=='etudiant'){
+        ProfessorModel.findByIdAndDelete(req.params.id).then(()=>{
+            console.log(req.params.id+" deleted")
+        }).catch((e)=>{
+            console.log(e);
+        })
+    }
+}
+module.exports.LoginUser=async(req,res,next)=>{
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
+    if(req.body.type=='professor'){
+        await ProfessorModel.findOne({email:req.body.email}).then((data)=>{
+            console.log(req.body)
+            if(data.password==req.body.password){
+                res.send({"info":true,data:data})
+                console.log("correct infos")
+            }
+            else{
+                console.log("not correct"+data.password)
+                res.send({
+                    "info":false
+                }) 
+            }
+        }).catch((e)=>{
+            res.send({
+                "info":false
+            }) 
+        })
+    }
+    else if(req.body.type=='etudiant'){
+            
+            await EtudiantModel.findOne({email:req.body.email}).then((data)=>{
+                console.log(req.body)
+                if(data.password==req.body.password){
+                    res.send({"info":true,data:data})
+                    console.log("correct infos")
+                }
+                else{
+                    console.log("not correct"+data.password)
+                    res.send({
+                        "info":false
+                    }) 
+                }
+            }).catch((e)=>{
+                res.send({
+                    "info":false
+                }) 
+            })
+        
+    }   
 }

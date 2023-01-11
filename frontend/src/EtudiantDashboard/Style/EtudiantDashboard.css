@@ -56,3 +56,10 @@ html {
 .button-navigation-container:active{
     width: 102px;
 }
+.Body-Studentdashboard-container{
+    min-height: 700px;
+}
+.questions-container-student{
+    padding: 10px;
+    height: 700px;
+}

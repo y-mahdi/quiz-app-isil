@@ -1,5 +1,5 @@
 const express=require('express');
-const {allQuizes,addQuiz,quizesByUserId,modifyQuiz,deleteQuiz} =require('../Controllers/quizController');
+const {allQuizes,addQuiz,quizesByUserId,modifyQuiz,deleteQuiz,addTentatives} =require('../Controllers/quizController');
 const router=express.Router();
 
 router.get('/',allQuizes); //all quizes
@@ -10,6 +10,8 @@ router.post('/quiz',addQuiz);  //post a quiz
 
 router.put('/quiz/:id',modifyQuiz);  //Modify a quiz   
 
-router.delete('/quiz/:id',deleteQuiz);  //delete a quiz   
+router.delete('/quiz/:id',deleteQuiz);  //delete a quiz  
+
+router.post('/tentatives/:id',addTentatives);
 
 module.exports=router;

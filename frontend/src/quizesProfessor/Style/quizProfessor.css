@@ -204,3 +204,7 @@ html {
     background: var(--color-bg-dark);
     /* border-radius: 10px; */
   }
+.succes-message-text{
+    margin-top: 10px;
+    font-family: Didact;
+}

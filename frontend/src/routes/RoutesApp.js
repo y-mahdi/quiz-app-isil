@@ -7,6 +7,7 @@ import Signup from '../Signup/Signup';
 import QuestionProfessor from "../questionsProfessor/questionsProfessor";
 import QuizProfessor from "../quizesProfessor/quizProfessor";
 import EtudiantDashboard from "../EtudiantDashboard/etudiantDashboard";
+import QuizStudent from "../quizStudent/quizStudent";
 export default function RoutesApp() {
     return(
         <>
@@ -18,8 +19,9 @@ export default function RoutesApp() {
                     <Route path="/Professor/Dashboard" element={<DashboardProfessor/>}/>
                     <Route path="/Professor/QuestionsBank" element={<QuestionProfessor />} />
                     <Route path="/Professor/Quiz" element={<QuizProfessor />} />
-
-                </Routes>
+                    <Route path="/Student/Dashboard" element={<EtudiantDashboard />} />
+                    <Route path="/Student/Quiz" element={<QuizStudent/>} />
+                </Routes>   
             </Router>
         </>
     )

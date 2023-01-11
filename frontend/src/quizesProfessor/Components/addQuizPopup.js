@@ -2,18 +2,38 @@ import closeIcon from '../../Icons/close.svg';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import GetQuestions from '../../questionsProfessor/Api/getQuestions';
+import AddQuizApi from '../Api/AddQuiz';
 export default function AddQuizPopup(open,closeFunc) {
     
     const [QuizName, setQuizName] = useState("");
     const [StartDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [Tentatives, setTentatives] = useState();
     const [ExactStudent, setExactStudent] = useState("");
     const [ListStudents, setListStudents] = useState([]);
-    const [ListQuestions, setListQuestions] = useState([])
     const [SelectedQuestions, setSelectedQuestions] = useState([])
     const [dataquestions, setDataquestions] = useState([]);
     const [Loaded, setLoaded] = useState(false)
+    const [SuccessAdd, setSuccessAdd] = useState(false)
+    const SuccesMessage=()=>{
+        if(SuccessAdd){
+            return(
+                <div className='succes-message-text'>Quiz est Ajouter avec Succes</div>
+            )
+        }
+        else{
+            return(
+                <></>
+            )
+        }
+    }
+    const resetvariables=()=>{
+        setSelectedQuestions([]);
+        setExactStudent("");
+        setListStudents([]);
+        setStartDate("");
+        setEndDate("");
+        setQuizName("");
+    }
     useEffect(()=>{
         fetchData();
     },[Loaded])
@@ -34,10 +54,18 @@ export default function AddQuizPopup(open,closeFunc) {
         }
         setExactStudent("");
     }
+    const valider=async()=>{
+        AddQuizApi(QuizName,SelectedQuestions,StartDate,endDate,ListStudents)
+        resetvariables();
+        await setSuccessAdd(true)
+    }
     if (open) {
         return(
             <div className="addQuiz-popup-container">
-                <button className='close-button-top-right' onClick={closeFunc}><img src={closeIcon} width="40px" alt='close icon '/></button>
+                <button className='close-button-top-right' onClick={()=>{
+                    closeFunc()
+                    resetvariables()
+                    }}><img src={closeIcon} width="40px" alt='close icon '/></button>
                 <div className="quiz-popup-title">Ajoute un Quiz</div>
                 <div className="df-form-addquiz">
                     <div className="df-form-addquiz-part1">
@@ -47,8 +75,8 @@ export default function AddQuizPopup(open,closeFunc) {
                         <input type={'datetime-local'} value={StartDate} onChange={(text)=>setStartDate(text.target.value)} />
                         <div className="input-label">date d’arrêt</div>
                         <input type={'datetime-local'} value={endDate} onChange={(text)=>setEndDate(text.target.value)}  />
-                        <div className="input-label">Nombre des Tentatives</div>
-                        <input type={'number'} placeholder='Nombre de Tentative' value={Tentatives} onChange={(numb)=>setTentatives(parseInt(numb.target.value))}/>
+                        {/* <div className="input-label">Nombre des Tentatives</div> */}
+                        {/* <input type={'number'} placeholder='Nombre de Tentative' value={Tentatives} onChange={(numb)=>setTentatives(parseInt(numb.target.value))}/> */}
                         <div className="input-label">l'Additions des Etudiants</div>
                         <input type={'email'} placeholder="L'email d'Etudiant" value={ExactStudent} onChange={(text)=>setExactStudent(text.target.value)} /><br/>
                         <button onClick={addStudent}>Ajoute</button>
@@ -102,7 +130,8 @@ export default function AddQuizPopup(open,closeFunc) {
                         </div>
                     </div>
                 </div>
-                <button className="valid-button-add-quiz-cn">Valider</button>
+                <button onClick={()=>valider()} className="valid-button-add-quiz-cn">Valider</button>
+                <SuccesMessage />
             </div>
         )
     } else {

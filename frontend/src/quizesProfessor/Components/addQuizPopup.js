@@ -14,6 +14,7 @@ export default function AddQuizPopup(open,closeFunc) {
     const [dataquestions, setDataquestions] = useState([]);
     const [Loaded, setLoaded] = useState(false)
     const [SuccessAdd, setSuccessAdd] = useState(false)
+    
     const SuccesMessage=()=>{
         if(SuccessAdd){
             return(
@@ -58,6 +59,18 @@ export default function AddQuizPopup(open,closeFunc) {
         AddQuizApi(QuizName,SelectedQuestions,StartDate,endDate,ListStudents)
         resetvariables();
         await setSuccessAdd(true)
+    }
+    const deleteStudents=(email)=>{
+        let array=[]
+        ListStudents.map((em)=>{
+            if(email==em){
+
+            }
+            else{
+                array.push(em)
+            }
+        })
+        setListStudents(array)
     }
     if (open) {
         return(
@@ -123,7 +136,9 @@ export default function AddQuizPopup(open,closeFunc) {
                                 {
                                     ListStudents.map((St)=>{
                                         return(
-                                            <div className='etudiant-email-panel-scroll-bar'><label>{St}</label><Link href="" className='delete-student-touchable'>Supprimer</Link> </div>
+                                            <div className='etudiant-email-panel-scroll-bar'><label>{St}</label><Link onClick={()=>{
+                                                deleteStudents(St)
+                                            }} href="" className='delete-student-touchable'>Supprimer</Link> </div>
                                         )
                                     })
                                 }

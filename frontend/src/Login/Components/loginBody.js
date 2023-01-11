@@ -16,9 +16,9 @@ export default function LoginBody() {
         if(data.info){
             // setMessage("Info Correct");
             if(TypeUser=='etudiant'){
-                Navigate('/Student/Dashboard')
+                Navigate('/Student/Dashboard',{state:{user:data.data}})
             }else{
-                Navigate('/Professor/Dashboard')
+                Navigate('/Professor/Dashboard',{state:{user:data.data}})
             }
         }
         else{

@@ -27,8 +27,8 @@ export default function AddQuestionPopup(Open,closefunct) {
     }
     const [AddedToDB, setAddedToDB] = useState(false)
     const [Question, setQuestion] = useState("");
-    const [typequestion, setTypequestion] = useState("");
-    const [diffculte, setDiffculte] = useState("");
+    const [typequestion, setTypequestion] = useState("multichoix");
+    const [diffculte, setDiffculte] = useState("facile");
     const [bonneReponse, setBonneReponse] = useState([]);
     const [ReponseErronnees, setReponseErronnees] = useState([])
     const [bonneReponseExact, setBonneReponseExact] = useState("");

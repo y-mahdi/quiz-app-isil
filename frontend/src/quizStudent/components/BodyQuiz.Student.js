@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PostTentativeStudent from "../api/postTentativesStudents";
 
 
-export default function BodyQuizStudent(quiz) {
+export default function BodyQuizStudent(quiz,userinfo) {
     let Navigate=useNavigate();
     // const [QuizExact, setQuizExact] = useState()
     const [Counter, setCounter] = useState(0);
@@ -12,13 +12,13 @@ export default function BodyQuizStudent(quiz) {
     // const [Answers, setAnswers] = useState(quiz.quetions[0].bonnereponse+quiz.quetions[0].reponseerronne)
     const [TotalNotes, setTotalNotes] = useState(0)
     const [SelectedAnswersExactQuestion, setSelectedAnswersExactQuestion] = useState([])
-    
-    useEffect(()=>{
+    const [ShowNote, setShowNote] = useState(false)
+    // useEffect(()=>{
         
-            // setAnswers(quiz.quetions[Counter].bonnereponse+quiz.quetions[Counter].reponseerronne)
+    //         // setAnswers(quiz.quetions[Counter].bonnereponse+quiz.quetions[Counter].reponseerronne)
         
         
-    },[Counter])
+    // },[Counter])
     const selectedAnswers=(ans)=>{
         setSelectedAnswersExactQuestion(SelectedAnswersExactQuestion=>[...SelectedAnswersExactQuestion,ans]);
     }
@@ -63,7 +63,7 @@ export default function BodyQuizStudent(quiz) {
                     selected:SelectedAnswersExactQuestion
                 }])
         }
-        if(quiz.quetions.length>(Counter)){
+        if(quiz.quetions.length>(Counter+1)){
             setCounter(Counter+1);
         }
         setSelectedAnswersExactQuestion([]);
@@ -71,6 +71,35 @@ export default function BodyQuizStudent(quiz) {
         
     }
     const postTentatives=async()=>{
+        let note=0;
+        let fausse=0;
+        let bonnes=0;
+        SelectedAnswersExactQuestion.map((ans)=>{
+            if(quiz.quetions[Counter].reponseerronne.includes(ans)){
+                fausse+=1;
+            }
+            else if(quiz.quetions[Counter].bonnereponse.includes(ans)){
+                bonnes+=1;
+            }
+        })
+        if(fausse>0 ){
+            note=0;
+            setListesdestentaives(Listesdestentaives=>[Listesdestentaives,{
+            questionid:quiz.quetions[0]._id,
+                note:note,
+                selected:SelectedAnswersExactQuestion
+            }])
+        }
+        else if(bonnes>0){
+            note=bonnes/(quiz.quetions[Counter].bonnereponse.length)
+            setTotalNotes(TotalNotes+note)
+            setListesdestentaives(Listesdestentaives=>[Listesdestentaives,{
+                questionid:quiz.quetions[0]._id,
+                    note:note,
+                    selected:SelectedAnswersExactQuestion
+                }])
+        }
+        
         try {
             await PostTentativeStudent(quiz._id,"ahmed@uni.edu",Listesdestentaives);
         } catch (error) {
@@ -89,7 +118,7 @@ export default function BodyQuizStudent(quiz) {
             return(
             <div className="questions-control-panel-cc">
                         <div>Votre Note Final est : {TotalNotes}</div>
-                        <button onClick={()=>{Navigate("/Student/Dashboard")}}>Finir</button>
+                        <button onClick={()=>{Navigate("/Student/Dashboard",{state:{user:userinfo}})}}>Finir</button>
             </div>)
         }
     }

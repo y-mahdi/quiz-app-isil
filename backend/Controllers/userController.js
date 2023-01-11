@@ -14,7 +14,7 @@ module.exports.addUser=async(req,res,next)=>{
                 email:req.body.email,
                 password:req.body.password
             }).then((data)=>{
-                res.send(data)
+                res.send(data)  
             }).catch((e)=>{
                 console.log(e);
             })

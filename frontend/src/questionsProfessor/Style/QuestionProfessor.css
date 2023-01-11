@@ -264,6 +264,7 @@ div{
     width: 50px;
     padding: 5px;
     font-family: Didact;
+    margin-right: 4px;
     color: var(--color-bg-dark);
 }
 .questions-control-panel-cc button:active{

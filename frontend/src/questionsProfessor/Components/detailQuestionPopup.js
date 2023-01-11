@@ -19,16 +19,16 @@ export default function DetailQuestion(open,closeFunc,question) {
                     <label>Bonnes Reponses</label><br/>
                     {/* <label>Reponse{1}:</label> la Reponse */}
                     {
-                        question.bonnereponse.map((i,rs)=>{
-                            return <><label>Reponse{i}:</label>{rs}<br/></>
+                        question.bonnereponse.map((rs,i)=>{
+                            return <><label>Reponse{i+1}:</label>{rs}<br/></>
                         })
                     }
                 </div>
                 <div className="detail-info-text">
                     <label>Bonnes Erronnee</label><br/>
                     {
-                        question.reponseerronne.map((i,rs)=>{
-                            return <><label>Reponse{1}:</label> la Reponse<br/></>
+                        question.reponseerronne.map((rs,i)=>{
+                            return <><label>Reponse{i+1}:</label>{rs}<br/></>
                         })
                     }
                 </div>

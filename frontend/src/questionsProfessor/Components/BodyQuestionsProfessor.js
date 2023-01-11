@@ -3,8 +3,9 @@ import AddQuestionPopup from "./addQuestionPopup";
 import { useEffect, useState } from "react";
 import GetQuestions from "../Api/getQuestions";
 import DetailQuestion from "./detailQuestionPopup";
+import DeleteQuestion from "../Api/DeleteQuestion";
 export default function BodyQuestionsProfessor() {
-    const [questionExact, setQuestionExact] = useState({"_id":"63bdbed9e9d97b2832a9766e","question":"Who create javascript","type":"multichoix","difficulte":"facile","bonnereponse":["Founder"],"reponseerronne":["creator of java"],"__v":0});
+    const [questionExact, setQuestionExact] = useState();
     const [openDetailPopup, setOpenDetailPopup] = useState(false)
     const closePopup=()=>{
         setOpenDetailPopup(false)
@@ -39,10 +40,15 @@ export default function BodyQuestionsProfessor() {
                             return(
                                 <div className="questions-control-panel-cc">
                                     <div>{qst.question}</div>
+                                    <button onClick={()=>{
+                                        DeleteQuestion(qst._id);
+                                        setLoaded(false)
+                                    }}>Supp</button>
                                     <button onClick={async()=>{
                                         await setQuestionExact(qst);
                                         setOpenDetailPopup(true)
                                     }}>Details</button>
+                                    
                                 </div>
                             )
                         })
@@ -53,7 +59,7 @@ export default function BodyQuestionsProfessor() {
             
         </div>
         {AddQuestionPopup(open,closeAdd)}
-        {DetailQuestion(openDetailPopup,questionExact,closePopup)}
+        {DetailQuestion(openDetailPopup,closePopup,questionExact)}
         </>
     )
 }

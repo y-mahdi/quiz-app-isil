@@ -1,8 +1,9 @@
 import closeIcon from '../../Icons/close.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import GetQuestions from '../../questionsProfessor/Api/getQuestions';
 export default function AddQuizPopup(open,closeFunc) {
+    
     const [QuizName, setQuizName] = useState("");
     const [StartDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
@@ -11,6 +12,17 @@ export default function AddQuizPopup(open,closeFunc) {
     const [ListStudents, setListStudents] = useState([]);
     const [ListQuestions, setListQuestions] = useState([])
     const [SelectedQuestions, setSelectedQuestions] = useState([])
+    const [dataquestions, setDataquestions] = useState([]);
+    const [Loaded, setLoaded] = useState(false)
+    useEffect(()=>{
+        fetchData();
+    },[Loaded])
+   const fetchData=async()=>{
+        let Array=[]
+        Array=await GetQuestions();
+        setDataquestions(Array)
+        setLoaded(true);
+   }
     const addStudent=()=>{
         let array=[]
         array=ListStudents;
@@ -44,7 +56,39 @@ export default function AddQuizPopup(open,closeFunc) {
                     <div className="df-form-addquiz-part2">
                         <div className="input-label">Selectionner les questions</div>
                         <div className="scroll-bar-question-container">
+                            {
+                                   dataquestions?.map((qst)=>{
+                                        if(!SelectedQuestions.includes(qst)){
+                                            return(
+                                            <div className='etudiant-email-panel-scroll-bar'><label>{qst.question}</label><Link onClick={()=>{
+                                                setSelectedQuestions(SelectedQuestions=>[...SelectedQuestions,qst]);
+                                            }} href="" className='delete-student-touchable'>Select</Link> </div>
+                                        )
+                                        }
+                                        else{
+                                            return(
+                                                <div className='etudiant-email-panel-scroll-bar'><label>{qst.question}</label><Link onClick={()=>{
+                                                    let array=[];
+                                                    SelectedQuestions?.map((qt)=>{
+                                                        if(qt._id==qst._id){
 
+                                                        }
+                                                        else{
+                                                           array.push(qst); 
+                                                        }
+                                                        
+                                                    })
+                                                    setSelectedQuestions(array)
+                                                }} href="" className='delete-student-touchable'>DeSelect</Link> </div>
+                                            )
+                                        }
+                                    
+                                    
+                                }) 
+                               
+                            
+                                
+                            }
                         </div>
                         <div className="input-label">La Liste des Etudiants</div>
                         <div className="scroll-bar-students-container">

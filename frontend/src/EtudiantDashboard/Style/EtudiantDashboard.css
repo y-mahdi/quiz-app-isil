@@ -1,0 +1,58 @@
+@font-face {
+    font-family: 'Didact';
+    src: url('../../../public/DidactGothic-Regular.ttf');
+  }
+:root{
+    --color-bg-dark: #192a33;
+    --color-bg-light: #1f3640;
+    --color-gray: #a8bec9;
+    --color-gray-dark: #7a8991;
+    --color-yellow: #f2b238;
+    --color-yellow-dark: #cd8d16;
+    --color-blue: #30c4be;
+    --color-blue-dark: #128c89;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 16px;
+}
+.container-dashboard-student{
+    background-color: var(--color-bg-dark);
+}
+.icon-quiz-container-logo{
+    text-align: center;
+    font-family: Didact;
+    font-size: 1.2rem;
+    color: var(--color-gray);
+    padding: 0.4rem;
+}
+.body-dashboard-student-container{
+    display: flex;
+}
+.body-dashboard-student-container-part1{
+    width: 200px;
+    height: 650px;
+    background-color: var(--color-bg-light);
+    border-top-right-radius: 10px;
+    text-align: center;
+    padding: 5px;
+   
+}
+.button-navigation-container{
+    margin-top: 10px;
+    border: none;
+    font-family: Didact;
+    font-size: 1rem;
+    border-radius: 10px;
+    padding: 10px;
+    color: var(--color-gray);
+    background-color: var(--color-bg-dark);
+    width: 100px;
+}
+.button-navigation-container:active{
+    width: 102px;
+}

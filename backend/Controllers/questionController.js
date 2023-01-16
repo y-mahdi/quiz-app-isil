@@ -38,10 +38,11 @@ module.exports.postQuestion=async(req,res,next)=>{
     res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
     // req.body={"question":"Who create javascript","type":"multichoix","difficulte":"facile","bonnereponse":["Founder"],"reponseerronne":["creator of java"]}{question:req.body.question,type:req.body.type,difficulte:req.body.difficulte,bonnereponse:req.body.bonnereponse,reponseerronne:req.body.reponseerronne}
     console.log(req.body)
+    
     if(!req.body){
         res.send({body:null})
     }
-
+    
     else{
         let token=req.header("x-auth-token");
         if(!token) return res.status(401).send({
@@ -73,6 +74,7 @@ module.exports.modifyQuestion=(req,res,next)=>{
     res.setHeader("Access-Control-Max-Age", "1800");
     res.setHeader("Access-Control-Allow-Headers", "content-type");
     res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
+    let token=req.header("x-auth-token");
     if(!token) return res.status(401).send({
         ok:false,
         error:"access denied . No token Provided"
@@ -106,6 +108,7 @@ module.exports.deleteQuestion=(req,res,next)=>{
     res.setHeader("Access-Control-Max-Age", "1800");
     res.setHeader("Access-Control-Allow-Headers", "content-type");
     res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
+    let token=req.header("x-auth-token");
     if(!token) return res.status(401).send({
         ok:false,
         error:"access denied . No token Provided"

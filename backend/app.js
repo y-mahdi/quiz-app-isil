@@ -6,11 +6,13 @@ const path=require('path')
 const routerUser=require('./Routes/userRoutes');
 const routerQuiz=require('./Routes/quizRoutes');
 const routerQuestion =require('./Routes/questionRoutes');
-
+const AuthRouter=require('./Routes/auth');
 //Middlewear 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,'public')));
+
+//Api Key
 
 //  use Routes
 const cors = require('cors');
@@ -24,10 +26,8 @@ app.use(cors(corsOptions));
 app.use(routerQuiz);
 app.use(routerQuestion);
 app.use(routerUser);
-app.put('/post',(req,res,next)=>{
-    console.log(req.body)
-    res.send(JSON.stringify(req.body))
-})
+app.use(AuthRouter)
+
  // Express static and json
 
 
